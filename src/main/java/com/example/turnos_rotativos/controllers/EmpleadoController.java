@@ -24,11 +24,19 @@ public class EmpleadoController {
         return new ResponseEntity<>(empleadoCreado, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<EmpleadoDTO> actualizarEmpleado(@PathVariable Long id, @Valid @RequestBody EmpleadoDTO empleadoDTO) {
+        EmpleadoDTO empleadoActualizado = empleadoService.actualizarEmpleado(id, empleadoDTO);
+        return new ResponseEntity<>(empleadoActualizado, HttpStatus.OK);
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> obtenerEmpleadoPorId(@PathVariable Long id) {
         EmpleadoDTO empleado = empleadoService.obtenerEmpleadoPorId(id);
         return new ResponseEntity<>(empleado, HttpStatus.OK);
     }
+
 
     @GetMapping
     public ResponseEntity<List<EmpleadoDTO>> obtenerTodosLosEmpleados() {
@@ -37,8 +45,8 @@ public class EmpleadoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarEmpleado(@PathVariable Long id) {
+    public ResponseEntity<String> eliminarEmpleado(@PathVariable Long id) {
         empleadoService.eliminarEmpleado(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("El empleado fue eliminado con éxito.", HttpStatus.OK);
     }
 }

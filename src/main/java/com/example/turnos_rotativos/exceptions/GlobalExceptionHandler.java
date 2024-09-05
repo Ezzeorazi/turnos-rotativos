@@ -1,6 +1,6 @@
-package com.example.turnos_rotativos.repository;
+package com.example.turnos_rotativos.exceptions;
 
-import com.example.turnos_rotativos.exceptions.BussinessException;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +13,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleBussinessException(BussinessException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+
 
 
 }

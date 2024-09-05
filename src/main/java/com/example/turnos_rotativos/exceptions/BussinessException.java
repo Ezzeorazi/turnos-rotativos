@@ -1,6 +1,9 @@
 package com.example.turnos_rotativos.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 public class BussinessException extends RuntimeException {
+    private HttpStatus status;
 
     public BussinessException() {
         super();
@@ -16,5 +19,14 @@ public class BussinessException extends RuntimeException {
 
     public BussinessException(Throwable cause) {
         super(cause);
+    }
+
+    public BussinessException(String message, HttpStatus status) {
+        super(message);
+        this.status = status;
+    }
+
+    public HttpStatus getStatus() {
+        return status;
     }
 }

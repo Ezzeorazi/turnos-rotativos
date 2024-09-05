@@ -53,6 +53,38 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
+    public EmpleadoDTO actualizarEmpleado(Long id, EmpleadoDTO empleadoDTO) {
+        // Validaciones
+        if (empleadoDTO.getFechaNacimiento().isAfter(LocalDate.now())) {
+            throw new BussinessException("La fecha de nacimiento no puede ser posterior al día de la fecha.");
+        }
+
+        if (empleadoDTO.getFechaIngreso().isAfter(LocalDate.now())) {
+            throw new BussinessException("La fecha de ingreso no puede ser posterior al día de la fecha.");
+        }
+
+        if (empleadoDTO.getFechaNacimiento().isAfter(LocalDate.now().minusYears(18))) {
+            throw new BussinessException("La edad del empleado no puede ser menor a 18 años.");
+        }
+
+        Optional<Empleado> empleadoOpt = empleadoRepository.findById(id);
+        if (!empleadoOpt.isPresent()) {
+            throw new BussinessException("Empleado no encontrado.");
+        }
+
+        Empleado empleado = empleadoOpt.get();
+        empleado.setNroDocumento(empleadoDTO.getNroDocumento());
+        empleado.setNombre(empleadoDTO.getNombre());
+        empleado.setApellido(empleadoDTO.getApellido());
+        empleado.setEmail(empleadoDTO.getEmail());
+        empleado.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
+        empleado.setFechaIngreso(empleadoDTO.getFechaIngreso());
+
+        Empleado empleadoActualizado = empleadoRepository.save(empleado);
+        return new EmpleadoDTO(empleadoActualizado);
+    }
+
+    @Override
     public EmpleadoDTO obtenerEmpleadoPorId(Long id) {
         Optional<Empleado> empleadoOpt = empleadoRepository.findById(id);
         if (empleadoOpt.isPresent()) {
