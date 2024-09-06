@@ -14,4 +14,5 @@ public interface JornadaRepository extends JpaRepository<Jornada, Long> {
     List<Jornada> findByIdEmpleadoAndFechaBetween(Long idEmpleado, LocalDate fechaDesde, LocalDate fechaHasta);
 
     List<Jornada> findByIdEmpleadoAndFecha(Long idEmpleado, LocalDate fecha);
+    boolean existsByIdEmpleado(Long idEmpleado);
 }

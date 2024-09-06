@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @RestController
@@ -30,13 +29,11 @@ public class EmpleadoController {
         return new ResponseEntity<>(empleadoActualizado, HttpStatus.OK);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> obtenerEmpleadoPorId(@PathVariable Long id) {
         EmpleadoDTO empleado = empleadoService.obtenerEmpleadoPorId(id);
         return new ResponseEntity<>(empleado, HttpStatus.OK);
     }
-
 
     @GetMapping
     public ResponseEntity<List<EmpleadoDTO>> obtenerTodosLosEmpleados() {
@@ -46,7 +43,17 @@ public class EmpleadoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarEmpleado(@PathVariable Long id) {
-        empleadoService.eliminarEmpleado(id);
-        return new ResponseEntity<>("El empleado fue eliminado con éxito.", HttpStatus.OK);
+        try {
+            empleadoService.eliminarEmpleado(id);
+            return new ResponseEntity<>("Empleado eliminado con éxito.", HttpStatus.OK);
+        } catch (Exception e) {
+            if (e.getMessage().contains("No se encontró el empleado con Id")) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            } else if (e.getMessage().contains("No es posible eliminar un empleado con jornadas asociadas")) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            } else {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 }

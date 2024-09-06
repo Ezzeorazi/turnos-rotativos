@@ -10,6 +10,5 @@ public interface EmpleadoService {
     EmpleadoDTO actualizarEmpleado(Long id, EmpleadoDTO empleadoDTO);
     EmpleadoDTO obtenerEmpleadoPorId(Long id);
     List<EmpleadoDTO> obtenerTodosLosEmpleados();
-    void eliminarEmpleado(Long id);
-}
+    void eliminarEmpleado(Long id) throws Exception; }
 

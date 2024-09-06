@@ -4,6 +4,7 @@ import com.example.turnos_rotativos.dto.EmpleadoDTO;
 import com.example.turnos_rotativos.entity.Empleado;
 import com.example.turnos_rotativos.exceptions.BussinessException;
 import com.example.turnos_rotativos.repository.EmpleadoRepository;
+import com.example.turnos_rotativos.repository.JornadaRepository;
 import com.example.turnos_rotativos.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
+
+    @Autowired
+    private JornadaRepository jornadaRepository;
 
     @Override
     public EmpleadoDTO crearEmpleado(EmpleadoDTO empleadoDTO) {
@@ -50,6 +54,18 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
         // Convertir entidad guardada a DTO para devolverla
         return new EmpleadoDTO(empleadoGuardado);
+    }
+
+    @Override
+    public void eliminarEmpleado(Long id) throws Exception {
+        Empleado empleado = empleadoRepository.findById(id)
+                .orElseThrow(() -> new Exception("No se encontró el empleado con Id: " + id));
+
+        if (jornadaRepository.existsByIdEmpleado(id)) {
+            throw new Exception("No es posible eliminar un empleado con jornadas asociadas.");
+        }
+
+        empleadoRepository.deleteById(id);
     }
 
     @Override
@@ -98,13 +114,5 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public List<EmpleadoDTO> obtenerTodosLosEmpleados() {
         List<Empleado> empleados = empleadoRepository.findAll();
         return empleados.stream().map(EmpleadoDTO::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public void eliminarEmpleado(Long id) {
-        if (!empleadoRepository.existsById(id)) {
-            throw new BussinessException("Empleado no encontrado.");
-        }
-        empleadoRepository.deleteById(id);
     }
 }
