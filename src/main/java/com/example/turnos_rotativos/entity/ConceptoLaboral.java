@@ -2,7 +2,6 @@ package com.example.turnos_rotativos.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "concepto_laboral")
 public class ConceptoLaboral {
@@ -11,20 +10,19 @@ public class ConceptoLaboral {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+
     @Column(name = "hs_maximo")
     private Integer hsMaximo;
 
     @Column(name = "hs_minimo")
     private Integer hsMinimo;
 
-    @Column(name = "laborable")
+    @Column(name = "laborable", nullable = false)
     private Boolean laborable;
 
-    @Column(name = "nombre")
-    private String nombre;
-
     // Getters and Setters
-
 
     public Long getId() {
         return id;
@@ -32,6 +30,14 @@ public class ConceptoLaboral {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Integer getHsMaximo() {
@@ -56,13 +62,5 @@ public class ConceptoLaboral {
 
     public void setLaborable(Boolean laborable) {
         this.laborable = laborable;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 }
