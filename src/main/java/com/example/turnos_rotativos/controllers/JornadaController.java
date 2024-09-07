@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/jornada")
 public class JornadaController {
@@ -19,9 +20,13 @@ public class JornadaController {
     @Autowired
     private JornadaService jornadaService;
 
+    // POST "/jornada" para crear una jornada
     @PostMapping
     public ResponseEntity<?> crearJornada(@RequestBody JornadaDTO jornadaDTO) {
         try {
+            if (jornadaDTO.getHsTrabajadas() == null) {
+                return new ResponseEntity<>("El campo hsTrabajadas no puede ser nulo.", HttpStatus.BAD_REQUEST);
+            }
             JornadaDTO nuevaJornada = jornadaService.crearJornada(jornadaDTO);
             return new ResponseEntity<>(nuevaJornada, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -29,6 +34,10 @@ public class JornadaController {
         }
     }
 
+    // GET "/jornada" para obtener todas las jornadas
+    // GET "/jornada?fechaDesde=yyyy-MM-dd&fechaHasta=yyyy-MM-dd&nroDocumento=12345678" para obtener jornadas filtradas por fecha y nroDocumento
+    // GET "/jornada?fechaDesde=yyyy-MM-dd&fechaHasta=yyyy-MM-dd" para obtener jornadas filtradas por fecha
+    // GET "/jornada?nroDocumento=12345678" para obtener jornadas filtradas por nroDocumento
     @GetMapping
     public ResponseEntity<?> obtenerJornadas(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde,

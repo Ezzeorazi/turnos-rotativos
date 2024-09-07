@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Handle BussinessException
+    // Return BAD_REQUEST status code
     @ExceptionHandler(BussinessException.class)
     public ResponseEntity<String> handleBussinessException(BussinessException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);

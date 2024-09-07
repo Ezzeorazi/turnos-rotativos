@@ -17,11 +17,17 @@ public class EmpleadoController {
     @Autowired
     private EmpleadoService empleadoService;
 
+    // POST "/empleados/crear" para crear un empleado
+    // POST "/empleados/crear" para crear un empleado con jornadas asociadas
+
     @PostMapping("/crear")
-    public ResponseEntity<EmpleadoDTO> crearEmpleado(@Valid @RequestBody EmpleadoDTO empleadoDTO) {
-        EmpleadoDTO empleadoCreado = empleadoService.crearEmpleado(empleadoDTO);
-        return new ResponseEntity<>(empleadoCreado, HttpStatus.CREATED);
+    public ResponseEntity<List<EmpleadoDTO>> crearEmpleados(@Valid @RequestBody List<EmpleadoDTO> empleadosDTO) {
+        List<EmpleadoDTO> empleadosCreados = empleadoService.crearEmpleados(empleadosDTO);
+        return new ResponseEntity<>(empleadosCreados, HttpStatus.CREATED);
     }
+
+    // PUT "/empleados/{id}" para actualizar un empleado
+    // PUT "/empleados/{id}" para actualizar un empleado con jornadas asociadas
 
     @PutMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> actualizarEmpleado(@PathVariable Long id, @Valid @RequestBody EmpleadoDTO empleadoDTO) {
@@ -29,18 +35,24 @@ public class EmpleadoController {
         return new ResponseEntity<>(empleadoActualizado, HttpStatus.OK);
     }
 
+
+    // GET "/empleados/{id}" para obtener un empleado por Id
+
     @GetMapping("/{id}")
     public ResponseEntity<EmpleadoDTO> obtenerEmpleadoPorId(@PathVariable Long id) {
         EmpleadoDTO empleado = empleadoService.obtenerEmpleadoPorId(id);
         return new ResponseEntity<>(empleado, HttpStatus.OK);
     }
 
+    // GET "/empleados" para obtener todos los empleados
     @GetMapping
     public ResponseEntity<List<EmpleadoDTO>> obtenerTodosLosEmpleados() {
         List<EmpleadoDTO> empleados = empleadoService.obtenerTodosLosEmpleados();
         return new ResponseEntity<>(empleados, HttpStatus.OK);
     }
 
+
+    // DELETE "/empleados/{id}" para eliminar un empleado
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarEmpleado(@PathVariable Long id) {
         try {

@@ -1,5 +1,3 @@
-// src/main/java/com/example/turnos_rotativos/service/impl/JornadaServiceImpl.java
-
 package com.example.turnos_rotativos.service.impl;
 
 import com.example.turnos_rotativos.dto.JornadaDTO;
@@ -29,7 +27,6 @@ public class JornadaServiceImpl implements JornadaService {
     @Autowired
     private ConceptoLaboralRepository conceptoLaboralRepository;
 
-
     @Override
     public JornadaDTO crearJornada(JornadaDTO jornadaDTO) throws Exception {
         // Validations
@@ -49,13 +46,12 @@ public class JornadaServiceImpl implements JornadaService {
                 .orElseThrow(() -> new Exception("No existe el concepto ingresado."));
 
         if ((concepto.getNombre().equals("Turno Normal") || concepto.getNombre().equals("Turno Extra")) && jornadaDTO.getHsTrabajadas() == null) {
-            throw new Exception("'horasTrabajadas' es obligatorio para el concepto ingresado.");
+            throw new Exception("'hsTrabajadas' es obligatorio para el concepto ingresado.");
         }
         if (concepto.getNombre().equals("Día Libre") && jornadaDTO.getHsTrabajadas() != null) {
-            throw new Exception("El concepto ingresado no requiere el ingreso de 'horasTrabajadas'.");
+            throw new Exception("El concepto ingresado no requiere el ingreso de 'hsTrabajadas'.");
         }
 
-        // Business rules validations
         List<Jornada> jornadasDelDia = jornadaRepository.findByIdEmpleadoAndFecha(jornadaDTO.getIdEmpleado(), jornadaDTO.getFecha());
         if (jornadasDelDia.stream().anyMatch(j -> j.getConceptoLaboral().getNombre().equals("Día Libre"))) {
             throw new Exception("El empleado ingresado cuenta con un día libre en esa fecha.");

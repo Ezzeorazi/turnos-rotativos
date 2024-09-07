@@ -4,6 +4,7 @@ import com.example.turnos_rotativos.entity.Jornada;
 
 import java.time.LocalDate;
 
+//  DTO de Jornada
 public class JornadaDTO {
     private Long id;
     private Long idEmpleado;
@@ -14,8 +15,10 @@ public class JornadaDTO {
     private String concepto;
     private Integer hsTrabajadas;
 
+    // Constructor vacío
     public JornadaDTO() {}
 
+    // Constructor
     public JornadaDTO(Jornada jornada) {
         this.id = jornada.getId();
         this.idEmpleado = jornada.getIdEmpleado();

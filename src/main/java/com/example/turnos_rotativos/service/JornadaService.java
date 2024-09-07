@@ -6,6 +6,7 @@ import com.example.turnos_rotativos.entity.Jornada;
 import java.time.LocalDate;
 import java.util.List;
 
+// Servicio para la entidad Jornada
 public interface JornadaService {
     JornadaDTO crearJornada(JornadaDTO jornadaDTO) throws Exception;
     List<JornadaDTO> obtenerJornadas(LocalDate fechaDesde, LocalDate fechaHasta, Long nroDocumento) throws Exception;

@@ -37,7 +37,7 @@ import java.time.LocalDate;
     // getters and setters
 
     public Empleado() {
-        this.fechaCreacion = LocalDate.now();  // Se deberia asignar la fecha actual al crear un empleado
+        this.fechaCreacion = LocalDate.now();
     }
 
     public Long getId() {

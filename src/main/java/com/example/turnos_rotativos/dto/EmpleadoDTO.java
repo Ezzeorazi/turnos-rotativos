@@ -4,7 +4,9 @@ import com.example.turnos_rotativos.entity.Empleado;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
+// DTO para la entidad Empleado
 public class EmpleadoDTO {
 
     private Long id;
@@ -15,10 +17,13 @@ public class EmpleadoDTO {
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
     private LocalDate fechaCreacion;
+    private List<EmpleadoDTO> empleados;
 
+    // Constructor vacío
     public EmpleadoDTO() {
     }
 
+    // Constructor
     public Empleado toEntity() {
         Empleado empleado = new Empleado();
         empleado.setNroDocumento(this.nroDocumento);
@@ -30,6 +35,7 @@ public class EmpleadoDTO {
         return empleado;
     }
 
+    // Constructor con parámetros
     public EmpleadoDTO(Empleado empleado) {
         this.id = empleado.getId();
         this.nroDocumento = empleado.getNroDocumento();
@@ -104,4 +110,14 @@ public class EmpleadoDTO {
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
+
+    public List<EmpleadoDTO> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(List<EmpleadoDTO> empleados) {
+        this.empleados = empleados;
+    }
+
+
 }

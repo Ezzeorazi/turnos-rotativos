@@ -115,4 +115,35 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         List<Empleado> empleados = empleadoRepository.findAll();
         return empleados.stream().map(EmpleadoDTO::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<EmpleadoDTO> crearEmpleados(List<EmpleadoDTO> empleadosDTO) {
+        List<Empleado> empleados = empleadosDTO.stream().map(this::convertToEntity).collect(Collectors.toList());
+        List<Empleado> empleadosGuardados = empleadoRepository.saveAll(empleados);
+        return empleadosGuardados.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    private Empleado convertToEntity(EmpleadoDTO empleadoDTO) {
+        Empleado empleado = new Empleado();
+        empleado.setNroDocumento(empleadoDTO.getNroDocumento());
+        empleado.setNombre(empleadoDTO.getNombre());
+        empleado.setApellido(empleadoDTO.getApellido());
+        empleado.setEmail(empleadoDTO.getEmail());
+        empleado.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
+        empleado.setFechaIngreso(empleadoDTO.getFechaIngreso());
+        return empleado;
+    }
+
+    private EmpleadoDTO convertToDTO(Empleado empleado) {
+        EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+        empleadoDTO.setId(empleado.getId());
+        empleadoDTO.setNroDocumento(empleado.getNroDocumento());
+        empleadoDTO.setNombre(empleado.getNombre());
+        empleadoDTO.setApellido(empleado.getApellido());
+        empleadoDTO.setEmail(empleado.getEmail());
+        empleadoDTO.setFechaNacimiento(empleado.getFechaNacimiento());
+        empleadoDTO.setFechaIngreso(empleado.getFechaIngreso());
+        empleadoDTO.setFechaCreacion(empleado.getFechaCreacion());
+        return empleadoDTO;
+    }
 }

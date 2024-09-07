@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "c52545b5-6b83-4851-93d1-f78130ee10ee",
+		"name": "Turnos - Rotativos - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26808103"
+	},
+	"item": [
+		{
+			"name": "Cargar todos los empleados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/empleados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un nuevo empleado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"nroDocumento\": 12345678,\r\n    \"nombre\": \"Carlos\",\r\n    \"apellido\": \"Lopez\",\r\n    \"email\": \"carlos.lop1ez@example.com\",\r\n    \"fechaNacimiento\": \"1995-07-30\",\r\n    \"fechaIngreso\": \"2024-07-05\"\r\n  }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/empleados/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener empleado por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/empleados/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Empleado por id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nroDocumento\": 30415654,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"1998-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/empleados/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar empleado por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/empleados/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener concepto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/concepto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"concepto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener jornada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jornada",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jornada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear jornada",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idEmpleado\": 1,\r\n    \"idConcepto\": 2,\r\n    \"fecha\": \"2024-09-07\",\r\n    \"hsTrabajadas\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/jornada",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jornada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear array de empleados",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"nroDocumento\": 12345678,\r\n    \"nombre\": \"Carlos\",\r\n    \"apellido\": \"Lopez\",\r\n    \"email\": \"carlos.lop1ez@example.com\",\r\n    \"fechaNacimiento\": \"1995-07-30\",\r\n    \"fechaIngreso\": \"2024-07-05\"\r\n  },\r\n  {\r\n    \"nroDocumento\": 87654321,\r\n    \"nombre\": \"Ana\",\r\n    \"apellido\": \"Garcia\",\r\n    \"email\": \"ana.garcia2@example.com\",\r\n    \"fechaNacimiento\": \"1990-03-14\",\r\n    \"fechaIngreso\": \"2023-12-01\"\r\n  },\r\n  {\r\n    \"nroDocumento\": 23456789,\r\n    \"nombre\": \"Pedro\",\r\n    \"apellido\": \"Martinez\",\r\n    \"email\": \"pedro.martinez3@example.com\",\r\n    \"fechaNacimiento\": \"1988-06-21\",\r\n    \"fechaIngreso\": \"2022-11-15\"\r\n  },\r\n  {\r\n    \"nroDocumento\": 34567890,\r\n    \"nombre\": \"Lucia\",\r\n    \"apellido\": \"Fernandez\",\r\n    \"email\": \"lucia.fernandez4@example.com\",\r\n    \"fechaNacimiento\": \"1993-02-05\",\r\n    \"fechaIngreso\": \"2021-10-10\"\r\n  },\r\n  {\r\n    \"nroDocumento\": 45678901,\r\n    \"nombre\": \"Javier\",\r\n    \"apellido\": \"Sanchez\",\r\n    \"email\": \"javier.sanchez5@example.com\",\r\n    \"fechaNacimiento\": \"1992-09-10\",\r\n    \"fechaIngreso\": \"2024-05-22\"\r\n  }\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/empleados/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

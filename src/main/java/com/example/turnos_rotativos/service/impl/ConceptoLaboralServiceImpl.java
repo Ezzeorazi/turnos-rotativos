@@ -14,16 +14,19 @@ public class ConceptoLaboralServiceImpl implements ConceptoLaboralService {
     @Autowired
     private ConceptoLaboralRepository conceptoLaboralRepository;
 
+    // Implementar los métodos de la interfaz ConceptoLaboralService
     @Override
     public List<ConceptoLaboral> obtenerTodosLosConceptos() {
         return conceptoLaboralRepository.findAll();
     }
 
+    // Implementar los métodos de la interfaz ConceptoLaboralService
     @Override
     public List<ConceptoLaboral> buscarConceptosPorNombre(String nombre) {
         return conceptoLaboralRepository.findByNombreContaining(nombre);
     }
 
+    // Implementar los métodos de la interfaz ConceptoLaboralService
     @Override
     public List<ConceptoLaboral> buscarConceptosPorId(Long id) {
         return conceptoLaboralRepository.findById(id).stream().toList();

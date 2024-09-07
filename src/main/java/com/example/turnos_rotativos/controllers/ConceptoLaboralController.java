@@ -17,6 +17,8 @@ public class ConceptoLaboralController {
     @Autowired
     private ConceptoLaboralService conceptoLaboralService;
 
+    // GET "/concepto" para obtener todos los conceptos precargados en data.sql
+
     @GetMapping
     public ResponseEntity<List<ConceptoLaboral>> obtenerTodosLosConceptos(
             @RequestParam(required = false) Long id,
